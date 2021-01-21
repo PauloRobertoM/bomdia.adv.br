@@ -40,14 +40,17 @@
                         </div>
                     </div>
                     <div class="item">
-                        <img src="assets/img/bomdia.jpg" alt="Boletim Informativo" class="_fluid boletim">
-                        <a href="http://fg1.com" class="fg1"><img src="assets/img/fg1.png" alt="" class="_fluid"></a>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/bomdia.jpg" alt="Boletim Informativo" class="_fluid boletim">
+                        <a href="http://fg1.com" target="_blank" class="fg1"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/fg1.png" alt="" class="_fluid"></a>
                     </div>
                 </div>
             </div>
         </footer>
 
-        <script src="assets/js/bundle.min.js"></script>
+        <script type='text/javascript' src="<?php echo get_template_directory_uri(); ?>/assets/js/bundle.min.js"></script>
+        <script type="text/javascript">
+            var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+        </script>
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
                 function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
