@@ -2,17 +2,13 @@
 
 require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Contato.php';
-require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Vitrines.php';
-require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Palestras.php';
-require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Depoimentos.php';
-require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Livros.php';
+require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Parceiros.php';
+require TEMPLATEPATH . DIRECTORY_SEPARATOR . 'Functions' . DIRECTORY_SEPARATOR . 'Cursos.php';
 
 $Bootstrap = new Bootstrap;
 $Contato = new Contato;
-$Vitrines = new Vitrines;
-$Palestras = new Palestras;
-$Depoimentos = new Depoimentos;
-$Livros = new Livros;
+$Parceiros = new Parceiros;
+$Cursos = new Cursos;
 
 function new_excerpt_length($length) {
    return 999999999;
@@ -40,4 +36,21 @@ function wordpress_pagination() {
         'current' => max( 1, get_query_var('paged') ),
         'total' => $wp_query->max_num_pages
     ) );
+}
+
+function pagination_bar() {
+    global $wp_query;
+
+    $total_pages = $wp_query->max_num_pages;
+
+    if ($total_pages > 1){
+        $current_page = max(1, get_query_var('paged'));
+
+        echo paginate_links(array(
+            'base' => get_pagenum_link(1) . '%_%',
+            'format' => '/page/%#%',
+            'current' => $current_page,
+            'total' => $total_pages,
+        ));
+    }
 }

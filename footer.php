@@ -2,14 +2,14 @@
             <div class="top">
                 <div class="inner">
                     <ul class="nav">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="noticias.php">Notícias</a></li>
-                        <li><a href="artigos.php">Artigos</a></li>
-                        <li><a href="expediente.php">Expediente</a></li>
-                        <li><a href="cursos.php">Cursos</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>">Home</a></li>
+                        <li><a href="<?php echo site_url('?page_id=22'); ?>">Notícias</a></li>
+                        <li><a href="<?php echo site_url('?page_id=26'); ?>">Artigos</a></li>
+                        <li><a href="<?php echo site_url('?page_id=37'); ?>">Expediente</a></li>
+                        <li><a href="<?php echo site_url('?page_id=28'); ?>">Cursos</a></li>
                         <li><a href="contato.php">Contato</a></li>
-                        <li><a href="dificuldade-recebimento.php">Dificuldade no Recebimento</a></li>
-                        <li><a href="cancelamento.php">Cancelamento</a></li>
+                        <li><a href="<?php echo site_url('?page_id=39'); ?>">Dificuldade no Recebimento</a></li>
+                        <li><a href="<?php echo site_url('?page_id=42'); ?>">Cancelamento</a></li>
                     </ul>
                     <div class="social">
                         <span class="label">Redes Sociais:</span>

@@ -1,4 +1,4 @@
-<header class="main-header -expanded">
+<header class="main-header ">
     <div class="header">
         <div class="item -logo">
             <a href="<?php echo site_url('/'); ?>" title="Página Inicial" class="logo">
@@ -51,52 +51,5 @@
                 </nav>
             </div>
         </div>
-    </div>
-
-    <div class="container || js-home-news-slider">
-        <div class="home-news">
-            <?php $count = 1; ?>
-            <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-                <?php foreach (get_the_category() as $category) { if ( $category->name == 'Destaque 1' and $count < 5 ) { ?>
-                    <?php $dia = get_the_date('d'); ?>
-                    <?php $mes = ucfirst(get_the_date('M')); ?>
-                    <div class="column">
-                        <a href="<?php the_permalink() ?>" class="box">
-                            <div class="date">
-                                <span class="day"><?php echo "{$dia}"; ?></span>
-                                <span class="month"><?php echo "{$mes}"; ?></span>
-                            </div>
-                            <span class="title"><?php the_title(); ?></span>
-                            <div class="plus">
-                                <i class="icon -add"></i>
-                            </div   >
-                        </a>
-                    </div>
-                    <?php $count++; ?>
-                <?php } } ?>
-            <?php endwhile; endif; ?>
-        </div>
-    </div>
-
-    <div class="home-news-bar">
-        <div class="inner _position-relative">
-            <div class="dots || js-home-news-dots"></div>
-            <a href="<?php echo site_url('?page_id=22'); ?>" class="link">Veja mais <strong class="_color-white _font-effra">Notícias</strong></a>
-        </div>
-    </div>
-
-    <div class="home-articles">
-        <?php $count2 = 1; ?>
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            <?php foreach (get_the_category() as $category) { if ( $category->name == 'Destaque 2' and $count2 < 5 ) { ?>
-                <?php $dia = get_the_date('d'); ?>
-                <?php $mes = ucfirst(get_the_date('M')); ?>
-                <a href="<?php the_permalink() ?>" class="column">
-                    <span class="date"><?php echo "{$dia}/{$mes}"; ?></span>
-                    <span class="title"><?php the_title(); ?></span>
-                </a>
-                <?php $count2++; ?>
-            <?php } } ?>
-        <?php endwhile; endif; ?>
     </div>
 </header>

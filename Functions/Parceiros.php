@@ -1,38 +1,38 @@
 <?php if (! defined('ABSPATH')) exit('No direct script access allowed');
 
-class Palestras {
+class Parceiros {
 
    public function __construct() {
       add_action('init', array($this, 'init'), 0);
-      add_filter('rwmb_meta_boxes', array($this, 'palestras_register_meta_boxes'));
+      add_filter('rwmb_meta_boxes', array($this, 'parceiros_register_meta_boxes'));
    }
 
    public function init() {
-      $this->palestras_post_type();
+      $this->parceiros_post_type();
    }
 
-   public function palestras_post_type() {
+   public function parceiros_post_type() {
 
       $labels = array(
-         'name'                => _x( 'Palestras', 'Post Type General Name', 'text_domain' ),
-         'singular_name'       => _x( 'Palestra', 'Post Type Singular Name', 'text_domain' ),
-         'menu_name'           => __( 'Palestras', 'text_domain' ),
-         'name_admin_bar'      => __( 'Palestras', 'text_domain' ),
-         'parent_item_colon'   => __( 'Palestra pai:', 'text_domain' ),
-         'all_items'           => __( 'Todas as palestras', 'text_domain' ),
-         'add_new_item'        => __( 'Adicionar nova palestra', 'text_domain' ),
-         'add_new'             => __( 'Adicionar nova', 'text_domain' ),
-         'new_item'            => __( 'Nova palestra', 'text_domain' ),
-         'edit_item'           => __( 'Ediar palestra', 'text_domain' ),
-         'update_item'         => __( 'Atualizar palestra', 'text_domain' ),
-         'view_item'           => __( 'Ver palestra', 'text_domain' ),
-         'search_items'        => __( 'Procurar palestra', 'text_domain' ),
+         'name'                => _x( 'Parceiros', 'Post Type General Name', 'text_domain' ),
+         'singular_name'       => _x( 'Parceiro', 'Post Type Singular Name', 'text_domain' ),
+         'menu_name'           => __( 'Parceiros', 'text_domain' ),
+         'name_admin_bar'      => __( 'Parceiros', 'text_domain' ),
+         'parent_item_colon'   => __( 'Parceiro pai:', 'text_domain' ),
+         'all_items'           => __( 'Todas os parceiros', 'text_domain' ),
+         'add_new_item'        => __( 'Adicionar novo parceiro', 'text_domain' ),
+         'add_new'             => __( 'Adicionar novo', 'text_domain' ),
+         'new_item'            => __( 'Novo parceiro', 'text_domain' ),
+         'edit_item'           => __( 'Ediar parceiro', 'text_domain' ),
+         'update_item'         => __( 'Atualizar parceiro', 'text_domain' ),
+         'view_item'           => __( 'Ver parceiro', 'text_domain' ),
+         'search_items'        => __( 'Procurar parceiro', 'text_domain' ),
          'not_found'           => __( 'Não encontrado', 'text_domain' ),
          'not_found_in_trash'  => __( 'Não encontrado na lixeira', 'text_domain' ),
       );
       $args = array(
-         'label'               => __( 'palestras', 'text_domain' ),
-         'description'         => __( 'Cadastro de palestras', 'text_domain' ),
+         'label'               => __( 'parceiros', 'text_domain' ),
+         'description'         => __( 'Cadastro de parceiros', 'text_domain' ),
          'labels'              => $labels,
          'supports'            => array( 'title', 'editor', ),
          'taxonomies'          => array( ),
@@ -48,33 +48,33 @@ class Palestras {
          'exclude_from_search' => false,
          'publicly_queryable'  => true,
          'capability_type'     => 'page',
-         'menu_icon'           => 'dashicons-editor-ul',
+         'menu_icon'           => 'dashicons-buddicons-buddypress-logo',
       );
-      register_post_type( 'palestras', $args );
+      register_post_type( 'parceiros', $args );
    }
 
-   public function palestras_register_meta_boxes( $meta_boxes ) {
-      $prefix = 'palestras_';
+   public function parceiros_register_meta_boxes( $meta_boxes ) {
+      $prefix = 'parceiros_';
       $meta_boxes[] = array(
-         'id'         => "{$prefix}subtitulo",
-         'title'      => 'Subtítulo',
-         'post_types' => array( 'palestras' ),
+         'id'         => "{$prefix}link",
+         'title'      => 'Link',
+         'post_types' => array( 'parceiros' ),
          'context'    => 'advanced',
          'priority'   => 'default',
          'autosave'   => true,
          'fields'     => array(
             array(
-               'id'   => "{$prefix}subtitulo",
+               'id'   => "{$prefix}link",
                'type' => 'text',
                'name' => null,
-               'desc' => 'Adicionar Subtítulo',
+               'desc' => 'Adicionar Link',
             ),
          ),
       );
       $meta_boxes[] = array(
          'id'         => "{$prefix}foto",
-         'title'      => 'Foto da palestra',
-         'post_types' => array( 'palestras' ),
+         'title'      => 'Foto do parceiro',
+         'post_types' => array( 'parceiros' ),
          'context'    => 'normal',
          'priority'   => 'high',
          'autosave'   => true,

@@ -6,26 +6,8 @@
 
     <section class="section-block">
         <div class="container">
-            <a href="url.php?id=13" class="ads-block" target="_blank">
-                <div class="image-block">
-                    <img src="<?php echo get_template_directory_uri(); ?>/arquivos/publicidades/1600507165177e1b07c6b.gif" alt="" class="image">
-                </div>
-            </a>
-            <a href="url.php?id=11" class="ads-block" target="_blank">
-                <div class="image-block">
-                    <img src="<?php echo get_template_directory_uri(); ?>/arquivos/publicidades/16044091703e2348f4af94.gif" alt="" class="image">
-                </div>
-            </a>
-            <a href="url.php?id=10" class="ads-block" target="_blank">
-                <div class="image-block">
-                    <img src="<?php echo get_template_directory_uri(); ?>/arquivos/publicidades/16062144460d5a92c4e2a6.png" alt="" class="image">
-                </div>
-            </a>
-            <a href="url.php?id=4" class="ads-block" target="_blank">
-                <div class="image-block">
-                    <img src="<?php echo get_template_directory_uri(); ?>/arquivos/publicidades/1604963355aa4dbf82fc6.png" alt="" class="image">
-                </div>
-            </a>
+            <?php if(function_exists( 'wp_bannerize' ))
+                wp_bannerize(); ?>
         </div>
     </section>
 
@@ -35,7 +17,7 @@
                 <div class="col1">
                     <section class="section-block -yellow">
                         <header class="section-header -theme-red">
-                            <a href="artigos.php" class="section">
+                            <a href="<?php echo site_url('?page_id=26'); ?>" class="section">
                                 <i class="icon -newspaper"></i>
                                 <h2 class="title">Artigos</h2>
                                 <div class="link">
@@ -44,54 +26,20 @@
                             </a>
                         </header>
                         <ul class="article-list">
-                            <li class="item -border-yellow">
-                                <a href="article-single.php?id=141" class="article">
-                                    <strong class="title _color-dark-red">
-                                    A felicidade de uma nação é diretamente proporcional à igualdade que ela pratica                  </strong>
-                                    <div class="authors _color-dark-yellow">
-                                        <div>
-                                        A condi&ccedil;&atilde;o de pessoas iguais, independentemente de ra&ccedil;a, credo, cor, ...                    </div>
-                                        <div>
-                                        Cássio Lisandro Telles é presidente da OAB-PR                    </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="item -border-yellow">
-                                <a href="article-single.php?id=140" class="article">
-                                    <strong class="title _color-dark-red">
-                                    Regime Jurídico Emergencial e Transitório das relações jurídicas de Direito Privado (RJET – Lei 14.010/2020)                  </strong>
-                                    <div class="authors _color-dark-yellow">
-                                        <div>
-                                        A pandemia ocasionada em raz&atilde;o da propaga&ccedil;&atilde;o do v&iacute;rus Sars-Cov-2 ...                    </div>
-                                        <div>
-                                        Caio Jardini Luiz e Antônio Carlos Jardini Luiz, advogados                    </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="item -border-yellow">
-                                <a href="article-single.php?id=139" class="article">
-                                    <strong class="title _color-dark-red">
-                                    A criação inoportuna de um novo tribunal                  </strong>
-                                    <div class="authors _color-dark-yellow">
-                                        <div>
-                                        Em meio &agrave; pandemia, que tira a vida de muitos brasileiros e brasileiras, traz dor &agrave;s ...                    </div>
-                                        <div>
-                                        Cássio Lisandro Telles é presidente da OAB-PR                    </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="item -border-yellow">
-                                <a href="article-single.php?id=138" class="article">
-                                    <strong class="title _color-dark-red">
-                                    O necessário apaziguamento de conflitos federativos                  </strong>
-                                    <div class="authors _color-dark-yellow">
-                                        <div>
-                                        No meio jur&iacute;dico nacional, importantes questionamentos t&ecirc;m surgido, inclusive com ...                    </div>
-                                        <div>
-                                        Felipe Santa Cruz e  Ophir Cavalcante, exs-Presidentes da OAB Nacional                    </div>
-                                    </div>
-                                </a>
-                            </li>
+                            <?php $count3 = 1; ?>
+                            <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+                                <?php foreach (get_the_category() as $category) { if ( $category->name == 'Artigos' and $count3 < 5 ) { ?>
+                                    <li class="item -border-yellow">
+                                        <a href="<?php the_permalink() ?>" class="article">
+                                            <strong class="title _color-dark-red"><?php the_title(); ?></strong>
+                                            <div class="authors _color-dark-yellow">
+                                                <div><?php echo excerpt(200, get_the_excerpt()); ?></div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <?php $count3++; ?>
+                                <?php } } ?>
+                            <?php endwhile; endif; ?>
                         </ul>
                     </section>
                 </div>
@@ -157,6 +105,31 @@
                 <div class="item">
                     <h2 class="title">Parceria<br>Institucional</h2>
                 </div>
+
+                <?php
+                    $args = array(
+                        'posts_per_page' => 3,
+                        'post_type'      => 'parceiros',
+                    );
+                    $parceiros = get_posts($args);
+                ?>
+
+                <?php foreach ($parceiros as $parceiro) : ?>
+                    <?php $tit_parceiro = $parceiro->post_title; ?>
+                    <?php $link_parceiro = $parceiro->parceiros_link; ?>
+                    <div class="item">
+                        <a href="<?= $link_parceiro ?>" target="_blank" title="<?= $tit_parceiro ?>">
+                            <div class="image-block">
+                                <?php
+                                    $parces = rwmb_meta('parceiros_foto', 'type=plupload_image', $parceiro->ID);
+                                    foreach ( $parces as $parce ) {
+                                        echo "<img src='{$parce['url']}' alt='{$tit_parceiro}' class='image' />";
+                                    }
+                                ?>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
